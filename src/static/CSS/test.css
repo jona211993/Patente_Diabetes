@@ -1,0 +1,91 @@
+.formulario {
+  background-color: #AABAFB;
+  width: 100%;
+  height: 100vh;
+  margin-top: 98px;
+  overflow: scroll;
+  text-align: center;
+}
+
+.espacio {
+  background-color: rgb(251, 251, 253);
+  width: 50em;
+  height: 100vh;
+  margin: 0px auto;
+}
+.titulo{
+    color:#0F1B36;
+    font-size: 32px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+.form-label{
+    color:rgb(6, 6, 6);
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.mb-3{
+    text-align: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+.variable{
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+.form-label-v{
+    margin-left: 10px;
+    margin-top: 10px;
+    color:rgb(32, 108, 180);
+    
+}
+.Contenedor_var{
+    background-color: rgb(251, 251, 253);
+    height: 100vh;
+    margin: 0px auto;
+}
+.form-check{
+    margin-left: 20px;
+}
+.form-control{
+    width:100px;
+    background-color: #E2E2E2
+}
+.Contenedor_Glucosa{
+    background-color: white;}
+.text_input{
+    position: left;
+    margin-left: 20px;       
+}
+
+.label_niv_glucosa{
+    text-align: left;
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+.spam{
+    margin-bottom: 10px;
+}
+.col1{
+    width:20%;
+    margin-right: 10px;
+}
+.col2{
+    width:70%;
+}
+.col1,
+.col2{
+    display: inline-block; 
+    height: 100%;
+}
+.boton{
+    margin-top: 70px;
+}
+.p-2{
+    display: inline-block;
+}

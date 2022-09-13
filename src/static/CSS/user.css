@@ -1,0 +1,36 @@
+body , html{
+    height:100%;
+    width:100%; 
+    font-size: 100%;
+    overflow: hidden; 
+    
+  }
+.carousel-inner{
+    background-color:#D8DBE1;
+    flex: 0 0 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.img_slider{
+    display: block;
+    margin: 0px auto;
+    
+}
+.footer{
+    text-align: center;
+    background-color: rgba(23, 32, 42 );
+    height:100vh;
+    color:aliceblue;
+    padding-top: 20px;
+
+
+}
+.navega{
+    display: inline;
+    color: antiquewhite;
+    padding-right: 15px;
+}
+.navega li{
+    display: inline;
+    
+}
