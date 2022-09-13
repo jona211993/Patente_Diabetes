@@ -1,63 +1,109 @@
 
-from flask  import Flask, render_template,request,redirect,url_for, flash, session
-from flask_mysqldb import MySQL
+from crypt import methods
+from flask import render_template, request, redirect, url_for, flash
 from config import config
 from flask_wtf.csrf import CSRFProtect
+
+import matplotlib.pyplot as plt
+import skfuzzy as fuzz
+import numpy as np
+from flask import Flask, request, flash
+from models.ModelUser import ModelUser
 from flask_login import LoginManager, login_user, logout_user, login_required
 
-#Models:
-from models.ModelUser import ModelUser
 
-#Entities:
-from models.entities.User import User
+from run import app, db, login_manager
 
-app=Flask(__name__)
 
-csrf=CSRFProtect()
-db=MySQL(app)
+from models.entities.User import User, users_schema
+from models.entities.Test import Test, test_schema, tests_schema
+from tests.createTest import createTest
+from tests.deleteTestById import deleteTestById
+from tests.getAllTests import getAllTests
+from tests.getTestById import getTestById
+from tests.getTestsByUserId import getTestByUserId
+from users.login import loginNormal
 
-login_manager_app = LoginManager(app)
 
-@login_manager_app.user_loader
+db.create_all()
+
+csrf = CSRFProtect()
+
+
+@login_manager.user_loader
 def load_user(id):
     return ModelUser.get_by_id(db, id)
+
 
 @app.route('/')
 def index():
     return redirect(url_for('login'))
 
-@app.route('/login', methods=['GET','POST'])
 
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    
-    if request.method=='POST':
-        user = User(0, request.form['username'], request.form['password'])
-        logged_user = ModelUser.login(db, user)
-        if logged_user != None:
-            if logged_user.password:
-                login_user(logged_user)
-                return redirect(url_for('inicio'))
-            else:
-                flash("Contraseña Incorrecta...")
-                return render_template('auth/login.html')
-        else:
-            flash("Usuario no Encontrado...")
-            return render_template('auth/login.html')
-    else:
+
+    if request.method == 'GET':
         return render_template('auth/login.html')
+
+    elif request.method == 'POST':
+        print(request.form)
+
+        # user = User(0, request.form['username'], request.form['password'])
+
+        # user = User.setUsername(request.form['username']).setPassword(
+        #     request.form['password'])
+        logged_user = ModelUser.login(
+            request.form['username'], request.form['password'])
+        if logged_user == None:
+            print("Usuario no Encontrado...")
+            return render_template('auth/login.html')
+
+        else:
+            # print(logged_user)
+            # flash('Logged in successfully.')
+            # login_user(logged_user)
+            return redirect(url_for('inicio'))
+        # else:
+        #     print("Contraseña Incorrecta...")
+        #     return render_template('auth/login.html')
+
+
+@app.route('/login-json', methods=['GET', 'POST'])
+@login_manager.user_loader
+def loginJson(user):
+    if request.method != 'POST':
+        return render_template('auth/login.html')
+
+    body = request.json
+
+    logged_user = loginNormal(body['username'], body['password'])
+    if logged_user == None:
+        flash("Usuario no Encontrado...")
+        return render_template('auth/login.html')
+
+    if logged_user.password:
+        login_user(logged_user)
+        return redirect(url_for('inicio'))
+    else:
+        flash("Contraseña Incorrecta...")
+        return render_template('auth/login.html')
+
 
 @app.route('/logout')
 def logout():
-    logout_user()    
+    logout_user()
     return redirect(url_for('login'))
+
 
 @app.route('/home')
 @login_required
 def home():
     return render_template('home.html')
 
+
 @app.route('/inicio')
-@login_required
+# @login_required
 def inicio():
     return render_template('auth/layout.html')
 
@@ -66,26 +112,53 @@ def inicio():
 # def protected():
 #     return "<h1>Esta es una vista protegida, solo para usuarios autenticados.</h1>"
 
+
 @app.route('/user')
 def user():
- return render_template ('auth/user.html')
- 
+    return render_template('auth/user.html')
+
+
 @app.route('/test')
 def test():
- return render_template ('auth/test.html')
+    return render_template('auth/test.html')
+
 
 def status_401(error):
     return redirect(url_for('login'))
 
 
 def status_404(error):
-    return "<h1>Página no encontrada</h1>", 404   
+    return "<h1>Página no encontrada</h1>", 404
 
 
-if __name__== '__main__':
+@app.route('/user/tests/<userId>', methods=['GET'])
+def getTestsByUserId(userId):
+    return getTestByUserId(userId)
+
+
+@app.route('/test/<testId>', methods=['GET', 'DELETE'])
+def getTestByIdController(testId):
+    if request.method == 'GET':
+        return getTestById(testId)
+    elif request.method == 'DELETE':
+        return deleteTestById(testId)
+
+
+@app.route('/tests', methods=['GET'])
+def getAllTestsController():
+    return getAllTests()
+
+
+@app.route('/make-diagnosis', methods=['POST'])
+def makeDiagnosis():
+    body = request.json
+
+    return createTest(body)
+
+
+if __name__ == '__main__':
     app.config.from_object(config['development'])
     csrf.init_app(app)
-    app.register_error_handler(401,status_401)
-    app.register_error_handler(404,status_404)
+    app.register_error_handler(401, status_401)
+    app.register_error_handler(404, status_404)
     app.run()
-
