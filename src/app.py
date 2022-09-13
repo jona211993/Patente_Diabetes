@@ -27,7 +27,7 @@ from users.login import loginNormal
 
 db.create_all()
 
-csrf = CSRFProtect()
+# csrf = CSRFProtect()
 
 
 @login_manager.user_loader
@@ -151,14 +151,29 @@ def getAllTestsController():
 
 @app.route('/make-diagnosis', methods=['POST'])
 def makeDiagnosis():
-    body = request.json
+    body = request.form
 
-    return createTest(body)
+    alimentation = (int(body['alimentation1']) + int(body['alimentation2']) +
+                    int(body['alimentation3']) + int(body['alimentation4']) + int(body['alimentation5'])) / 5
+    genetical = (int(body['genetical1']) + int(body['genetical2']) + int(
+        body['genetical3']) + int(body['genetical4']) + int(body['genetical5']))
+    glucose = int(body['glucose'])
+    physicalActivity = (int(body['physicalActivity1']) + int(
+        body['physicalActivity2']) + int(body['physicalActivity3'])) / 3
+
+    newJson = {
+        "alimentation": alimentation,
+        "glucose": glucose,
+        "genetical": genetical,
+        "physicalActivity": physicalActivity
+    }
+
+    return createTest(newJson)
 
 
 if __name__ == '__main__':
     app.config.from_object(config['development'])
-    csrf.init_app(app)
+    # csrf.init_app(app)
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()

@@ -2,276 +2,399 @@
 block customCSS %}
 <link rel="stylesheet" href="{{url_for('static', filename= 'css/user.css')}}" />
 <link rel="stylesheet" href="{{url_for('static', filename= 'css/test.css')}}" />
-{% endblock %}
-{% block body %}
+{% endblock %} {% block body %}
 <nav class="navbar navbar-dark bg-dark fixed-top navbar-light bg-light">
-    <div class="container-fluid d-flex mb-3">
-        <div class="me-auto p-2">
-            <a class="navbar-brand">Bienvenido {% block name_user %} {% endblock %}
-            </a>
-        </div>
-        <div class="p-2">
-            <ul class="navega">
-                <li><a class="navega" aria-current="page" href="test">Inicio</a></li>
-                <li><a class="navega" aria-current="page" href="#">Mis Tests</a></li>
-                <li><a class="navega" aria-current="page" href="test">Nuevo Test</a></li>
-            </ul>
-        </div>
-        <div class="p-2">
-            <button class="navbar-toggler p-2 flex-shrink-1" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
-            </button>
-        </div>
-
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-            aria-labelledby="offcanvasDarkNavbarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-                    Test_Diabetes
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mi Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Salir</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <div class="container-fluid d-flex mb-3">
+    <div class="me-auto p-2">
+      <a class="navbar-brand"
+        >Bienvenido {% block name_user %} {% endblock %}
+      </a>
     </div>
+    <div class="p-2">
+      <ul class="navega">
+        <li><a class="navega" aria-current="page" href="test">Inicio</a></li>
+        <li><a class="navega" aria-current="page" href="#">Mis Tests</a></li>
+        <li>
+          <a class="navega" aria-current="page" href="test">Nuevo Test</a>
+        </li>
+      </ul>
+    </div>
+    <div class="p-2">
+      <button
+        class="navbar-toggler p-2 flex-shrink-1"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar"
+      >
+        <img
+          src="https://github.com/mdo.png"
+          alt=""
+          width="32"
+          height="32"
+          class="rounded-circle me-2"
+        />
+      </button>
+    </div>
+
+    <div
+      class="offcanvas offcanvas-end text-bg-dark"
+      tabindex="-1"
+      id="offcanvasDarkNavbar"
+      aria-labelledby="offcanvasDarkNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+          Test_Diabetes
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Mi Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </nav>
 {% block panel %}
-<div class="formulario">
-    <div class="espacio">
-        <h1 class="titulo">Test de Porcentaje de Riesgo Diabetes</h1>
-        <div>
-            <div class="variable">
-                <label class="form-label-v">Alimentación</label>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanto consumes legumbres?. (Por ejemplo:
-                    Lentejas,habas,etc)
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Mediano</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanto consumes frutas?. (Entera, no en jugos)
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Mediano</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanto consumes productos lácteos?. (Por ejemplo:
-                    leche, yogurt,etc)
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Mediano</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanto comes verduras?
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Mediano</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanto comes alimentos ricos en fibra?. (Por ejemplo:
-                    Avena, quinua,etc)
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Mediano</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-        </div>
-        <div class="Contenedor_var">
-            <div class="variable">
-                <label class="form-label-v">Genética</label>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">
-                    ¿Tus hermanos padecen diabetes?. (Si no tienes hermanos marca no)
-                </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Sí
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        No
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">
-                    ¿Tus padres padecen diabetes?.
-                </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Sí
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        No
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">
-                    ¿Alguno de tus tíos padece diabetes?.
-                </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Sí
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        No
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">
-                    ¿Tus abuelos padecen diabetes?.
-                </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Sí
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        No
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">
-                    ¿Alguno de tus primos padece diabetes?.
-                </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Sí
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        No
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="Contenedor_Glucosa">
-            <div class="variable">
-                <label class="form-label-v">Glucosa</label>
-
-            </div>
-            <div class="label_niv_glucosa">
-                <label for="formGroupExampleInput">
-                    ¿Cuánto obtuviste de glucosa en tu último examen de diabetes?
-                </label>
-            </div>
-            
-            <div class="text_input">
-                    <div class="col1"><span class="spam">Valor del glucómetro </span></div>
-                    <div class="col2"> <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"></div>
-             </div>
-            
-        </div>
-        <div class="Contenedor_var">
-            <div class="variable">
-                <label class="form-label-v">Actividad Física</label>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanta actividad física de mediano impacto
-                    realizas a la semana?. (Por ejemplo:Correr,etc)
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Normal</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanta actividad física de alto impacto
-                    realizas a la semana?. (Por ejemplo:Tennis,fútbol,etc)
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Normal</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">
-                    Semanalmente ¿Qué tanta actividad física de bajo impacto
-                    realizas a la semana?. (Por ejemplo: Pasear, mover cosas,etc)
-                </label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga una opccion</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Normal</option>
-                    <option value="3">Alto</option>
-                </select>
-            </div>
-            <div class="boton">
-                <button type="button" class="btn btn-success">Guardar</button>
-            </div>
-        </div>
+<form class="formulario" method="post" action="/make-diagnosis">
+  <div class="espacio">
+    <h1 class="titulo">Test de Porcentaje de Riesgo Diabetes</h1>
+    <div>
+      <div class="variable">
+        <label class="form-label-v">Alimentación</label>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanto consumes legumbres?. (Por ejemplo:
+          Lentejas,habas,etc)
+        </label>
+        <select
+          name="alimentation1"
+          class="form-select"
+          aria-label="Default select example"
+          required
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanto consumes frutas?. (Entera, no en jugos)
+        </label>
+        <select
+          required
+          name="alimentation2"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanto consumes productos lácteos?. (Por ejemplo:
+          leche, yogurt,etc)
+        </label>
+        <select
+          name="alimentation3"
+          class="form-select"
+          aria-label="Default select example"
+          required
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanto comes verduras?
+        </label>
+        <select
+          required
+          name="alimentation4"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanto comes alimentos ricos en fibra?. (Por ejemplo:
+          Avena, quinua,etc)
+        </label>
+        <select
+          required
+          name="alimentation5"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
     </div>
-</div>
-{%endblock %}
-{% endblock %}
-{% block footer %}
+    <div class="Contenedor_var">
+      <div class="variable">
+        <label class="form-label-v">Genética</label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">
+          ¿Tus hermanos padecen diabetes?. (Si no tienes hermanos marca no)
+        </label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical1"
+            id="geneticalRadio1"
+            value="1"
+          />
+          <label class="form-check-label" for="geneticalRadio1"> Sí </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical1"
+            id="geneticalRadio2"
+            value="0"
+            checked
+          />
+          <label class="form-check-label" for="geneticalRadio2"> No </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"> ¿Tus padres padecen diabetes?. </label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical2"
+            id="geneticalRadio1"
+            value="1"
+          />
+          <label class="form-check-label" for="flexRadioDefault1"> Sí </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical2"
+            id="geneticalRadio2"
+            value="0"
+            checked
+          />
+          <label class="form-check-label" for="flexRadioDefault2"> No </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">
+          ¿Alguno de tus tíos padece diabetes?.
+        </label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical3"
+            id="geneticalRadio1"
+            value="1"
+          />
+          <label class="form-check-label" for="geneticalRadio1"> Sí </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical3"
+            id="geneticalRadio2"
+            value="0"
+            checked
+          />
+          <label class="form-check-label" for="geneticalRadio2"> No </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"> ¿Tus abuelos padecen diabetes?. </label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical4"
+            id="geneticalRadio1"
+            value="1"
+          />
+          <label class="form-check-label" for="geneticalRadio1"> Sí </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical4"
+            id="geneticalRadio2"
+            value="0"
+            checked
+          />
+          <label class="form-check-label" for="geneticalRadio2"> No </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">
+          ¿Alguno de tus primos padece diabetes?.
+        </label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical5"
+            id="geneticalRadio1"
+            value="1"
+          />
+          <label class="form-check-label" for="geneticalRadio1"> Sí </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="genetical5"
+            id="geneticalRadio2"
+            value="0"
+            checked
+          />
+          <label class="form-check-label" for="geneticalRadio2"> No </label>
+        </div>
+      </div>
+    </div>
+    <div class="Contenedor_Glucosa">
+      <div class="variable">
+        <label class="form-label-v">Glucosa</label>
+      </div>
+      <div class="label_niv_glucosa">
+        <label for="formGroupExampleInput">
+          ¿Cuánto obtuviste de glucosa en tu último examen de diabetes?
+        </label>
+      </div>
+
+      <div class="text_input">
+        <div class="col1"><span class="spam">Valor del glucómetro </span></div>
+        <div class="col2">
+          <input
+          required
+            type="text"
+            class="form-control"
+            name="glucose"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="Contenedor_var">
+      <div class="variable">
+        <label class="form-label-v">Actividad Física</label>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanta actividad física de mediano impacto realizas a
+          la semana?. (Por ejemplo:Correr,etc)
+        </label>
+        <select name="physicalActivity1" class="form-select" aria-label="Default select example">
+            <option value="0">0</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanta actividad física de alto impacto realizas a la
+          semana?. (Por ejemplo:Tennis,fútbol,etc)
+        </label>
+        <select name="physicalActivity2" class="form-select" aria-label="Default select example">
+            <option value="0">0</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">
+          Semanalmente ¿Qué tanta actividad física de bajo impacto realizas a la
+          semana?. (Por ejemplo: Pasear, mover cosas,etc)
+        </label>
+        <select name="physicalActivity3" class="form-select" aria-label="Default select example">
+            <option value="0">0</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+      </div>
+      <div class="boton">
+        <button type="submit" class="btn btn-success">Guardar</button>
+      </div>
+    </div>
+  </div>
+</form>
+{%endblock %} {% endblock %} {% block footer %}
 <!-- <footer class="footer">FISI- UNMSM 2022</footer> -->
 {% endblock %}
