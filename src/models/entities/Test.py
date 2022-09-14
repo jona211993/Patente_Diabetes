@@ -5,6 +5,11 @@ from run import db, ma
 
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
+    name = db.Column(db.String(255), nullable = False)
+    document_number = db.Column(db.String(8), nullable = False)
+    age = db.Column(db.Integer, nullable = False)
+
     alimentation = db.Column(db.Float, nullable=False)
     genetical = db.Column(db.Float, nullable=False)
     glucose = db.Column(db.Float, nullable=False)
@@ -19,6 +24,19 @@ class Test(db.Model):
     result_label = db.Column(db.String(31), nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def setName(self, name):
+        self.name = name
+        return self
+
+    def setDocumentNumber(self, document_number):
+        self.document_number = document_number
+        return self
+
+
+    def setAge(self, age):
+        self.age = age
+        return self
 
     def setAlimentation(self, alimentation):
         self.alimentation = alimentation
@@ -67,7 +85,7 @@ class Test(db.Model):
 
 class TestSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'alimentation', 'genetical', 'glucose', 'physical_activity', 'absolute_value',
+        fields = ('id', 'name', 'document_number', 'age', 'alimentation', 'genetical', 'glucose', 'physical_activity', 'absolute_value',
                   'low_pertenence_grade', 'mid_pertenence_grade', 'high_pertenence_grade', 'critical_pertenence_grade'
                   'absolute_value'
                   'low_pertenence_grade'

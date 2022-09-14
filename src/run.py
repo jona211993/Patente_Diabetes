@@ -6,7 +6,7 @@ from config import config
 from flask_login import LoginManager, login_user, logout_user, login_required
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 bd=MySQL(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://' + config['development'].MYSQL_USER + ":" + config['development'].MYSQL_PASSWORD + \
     "@" + config['development'].MYSQL_HOST + \

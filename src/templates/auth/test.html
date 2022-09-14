@@ -13,7 +13,9 @@ block customCSS %}
     <div class="p-2">
       <ul class="navega">
         <li><a class="navega" aria-current="page" href="user">Inicio</a></li>
-        <li><a class="navega" aria-current="page" href="#">Lista de Tests</a></li>
+        <li>
+          <a class="navega" aria-current="page" href="#">Lista de Tests</a>
+        </li>
         <li>
           <a class="navega" aria-current="page" href="test">Nuevo Test</a>
         </li>
@@ -71,27 +73,51 @@ block customCSS %}
 <form class="formulario" method="post" action="/make-diagnosis">
   <div class="espacio">
     <h1 class="titulo">Test de Porcentaje de Riesgo Diabetes</h1>
-    <br>
+    <br />
     <div class="variable">
       <label class="form-label-v">DATOS DEL PARTICIPANTE</label>
     </div>
-    <br>
+    <br />
     <div class="input_datos_n">
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">Nombre: </span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <span class="input-group-text" id="inputGroup-sizing-default"
+          >Nombre:
+        </span>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+        />
       </div>
     </div>
     <div class="input_datos_dni">
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">D.N.I </span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <span class="input-group-text" id="inputGroup-sizing-default"
+          >D.N.I
+        </span>
+        <input
+          type="text"
+          name="document_number"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+        />
       </div>
     </div>
     <div class="input_datos_edad">
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">Edad </span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <span class="input-group-text" id="inputGroup-sizing-default"
+          >Edad
+        </span>
+        <input
+          type="text"
+          name="age"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+        />
       </div>
     </div>
     <div class="contenedor_a">
@@ -347,7 +373,7 @@ block customCSS %}
         <div class="col1"><span class="spam">Valor del glucómetro </span></div>
         <div class="col2">
           <input
-          required
+            required
             type="text"
             class="form-control"
             name="glucose"
@@ -366,15 +392,19 @@ block customCSS %}
           Semanalmente ¿Qué tanta actividad física de mediano impacto realizas a
           la semana?. (Por ejemplo:Correr,etc)
         </label>
-        <select name="physicalActivity1" class="form-select" aria-label="Default select example">
-            <option value="0">0</option>
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
+        <select
+          name="physicalActivity1"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
         </select>
       </div>
       <div class="mb-3">
@@ -382,15 +412,19 @@ block customCSS %}
           Semanalmente ¿Qué tanta actividad física de alto impacto realizas a la
           semana?. (Por ejemplo:Tennis,fútbol,etc)
         </label>
-        <select name="physicalActivity2" class="form-select" aria-label="Default select example">
-            <option value="0">0</option>
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
+        <select
+          name="physicalActivity2"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
         </select>
       </div>
       <div class="mb-3">
@@ -398,15 +432,19 @@ block customCSS %}
           Semanalmente ¿Qué tanta actividad física de bajo impacto realizas a la
           semana?. (Por ejemplo: Pasear, mover cosas,etc)
         </label>
-        <select name="physicalActivity3" class="form-select" aria-label="Default select example">
-            <option value="0">0</option>
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
+        <select
+          name="physicalActivity3"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
         </select>
       </div>
       <div class="boton">
