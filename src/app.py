@@ -12,7 +12,7 @@ from models.ModelUser import ModelUser
 from flask_login import LoginManager, login_user, logout_user, login_required
 
 
-from run import app, db, login_manager
+from run import app, db, login_manager,bd
 
 
 from models.entities.User import User, users_schema
@@ -141,6 +141,15 @@ def getTestByIdController(testId):
 @app.route('/tests', methods=['GET'])
 def getAllTestsController():
     return getAllTests()
+
+
+@app.route('/lista')
+def lista():
+    cur=bd.connection.cursor()
+    cur.execute('SELECT*FROM test')
+    data=cur.fetchall()
+    
+    return render_template('auth/lista_tests.html',tests=data)
 
 
 @app.route('/make-diagnosis', methods=['POST'])
