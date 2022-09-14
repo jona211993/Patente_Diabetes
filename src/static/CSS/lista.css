@@ -6,3 +6,10 @@ margin-top: 98px;
 overflow: scroll;
 text-align: center;
 }
+
+thead.cabecera tr td{
+    font-family: monospace;
+    color: rgb(246, 246, 246);
+    background-color:rgb(40, 42, 104);
+    font-size: 20px;
+}
