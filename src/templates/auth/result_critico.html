@@ -1,0 +1,129 @@
+{% extends 'auth/user.html' %} {% block title %} Test Diabetes {%endblock %} {%
+    block customCSS %}
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/user.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/test.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/result.css')}}" />
+    {% endblock %} {% block body %}
+    <nav class="navbar navbar-dark bg-dark fixed-top navbar-light bg-light">
+      <div class="container-fluid d-flex mb-3">
+        <div class="me-auto p-2">
+          <a class="navbar-brand"
+            >Bienvenido {% block name_user %} {% endblock %}
+          </a>
+        </div>
+        <div class="p-2">
+          <ul class="navega">
+            <li><a class="navega" aria-current="page" href="user">Inicio</a></li>
+            <li><a class="navega" aria-current="page" href="#">Lista de Tests</a></li>
+            <li>
+              <a class="navega" aria-current="page" href="test">Nuevo Test</a>
+            </li>
+          </ul>
+        </div>
+        <div class="p-2">
+          <button
+            class="navbar-toggler p-2 flex-shrink-1"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt=""
+              width="32"
+              height="32"
+              class="rounded-circle me-2"
+            />
+          </button>
+        </div>
+    
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+              Test_Diabetes
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Mi Perfil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Salir</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% block panel %}
+    <div class="panel">
+       <div class="cuerpo-panel">
+            <div class="riesgo-4"><h1>RIESGO CRÍTICO</h1> </div>
+            <div class="mensaje">
+                Gran probabilidad  (... %) de padecer o estar padeciendo diabetes
+                <br>
+                Debes cambiar radicalmente tu estilo de vida.
+            </div>
+       </div> 
+       <div class="row">
+            <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Alimentación</h5>
+                <p class="card-text">Llevar una dieta estricta.</p>
+                <p class="card-text">Contar las calorias consumidas a diario.</p>
+                <p class="card-text">Consumir máximo 2000 calorias al día.(Consultar con un médico)</p>
+                <p class="card-text">Llevar una dieta rica en: proteinas,fibra,verduras y frutas enteras.</p>
+                <p class="card-text">Evita consumir grasas.</p>
+                <p class="card-text">Evitar consumir azúcar.</p>                               
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Actividad Física</h5>
+                <p class="card-text">Realizar rutinas de 30 minutos 3 o 4 veces por semana.</p>
+                <p class="card-text">Contratar un entrenador personal que guie tu ejercicio físico.</p>
+                <p class="card-text">Debes llevar a cabo rutinas intensas para alcanzar indice de masa
+                    corporal adecuado.</p>              
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Consejos Finales (Generales)</h5>
+                    <p class="card-text">Debes tener mucho cuidado, sea conciente que estás en un gran peligro.</p>
+                    <p class="card-text">Accede a un endocrinólogo para obtener más información de tu estado actual.</p>
+                    <p class="card-text">Realiza 2 control al año sobre diabetes y otras enfermedades endocrinas.</p>
+                
+                   
+                </div>
+                </div>
+            </div>
+
+       </div>
+       <div class="boton_a">
+        <a href="user"><button type="button" class="btn btn-primary btn-lg btn-block">Aceptar</button></a>
+       </div>
+    </div>
+    <div>
+        holaaaa
+    </div>
+    {%endblock %} {% endblock %} {% block footer %}
+    <!-- <footer class="footer">FISI- UNMSM 2022</footer> -->
+    {% endblock %}

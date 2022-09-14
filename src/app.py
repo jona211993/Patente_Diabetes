@@ -1,8 +1,8 @@
 
-from crypt import methods
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash,jsonify
 from config import config
-from flask_wtf.csrf import CSRFProtect
+
+#from flask_wtf.csrf import CSRFProtect
 
 import matplotlib.pyplot as plt
 import skfuzzy as fuzz
@@ -63,7 +63,7 @@ def login():
             # print(logged_user)
             # flash('Logged in successfully.')
             # login_user(logged_user)
-            return redirect(url_for('inicio'))
+            return redirect(url_for('user'))
         # else:
         #     print("Contraseña Incorrecta...")
         #     return render_template('auth/login.html')
@@ -94,12 +94,6 @@ def loginJson(user):
 def logout():
     logout_user()
     return redirect(url_for('login'))
-
-
-@app.route('/home')
-@login_required
-def home():
-    return render_template('home.html')
 
 
 @app.route('/inicio')
@@ -167,8 +161,9 @@ def makeDiagnosis():
         "genetical": genetical,
         "physicalActivity": physicalActivity
     }
-
-    return createTest(newJson)
+    data=createTest(newJson)
+    #createTest(newJson)
+    return render_template('auth/result_bajo.html',data=data)
 
 
 if __name__ == '__main__':
