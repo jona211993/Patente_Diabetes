@@ -1,5 +1,5 @@
 
-from flask import render_template, request, redirect, url_for, flash,jsonify
+from flask import render_template, request, redirect, url_for, flash, jsonify, make_response
 from config import config
 
 #from flask_wtf.csrf import CSRFProtect
@@ -12,7 +12,7 @@ from models.ModelUser import ModelUser
 from flask_login import LoginManager, login_user, logout_user, login_required
 
 
-from run import app, db, login_manager,bd
+from run import app, db, login_manager, bd
 
 
 from models.entities.User import User, users_schema
@@ -25,6 +25,7 @@ from tests.getTestsByUserId import getTestByUserId
 from users.login import loginNormal
 
 
+# db.drop_all()
 db.create_all()
 
 # csrf = CSRFProtect()
@@ -145,11 +146,28 @@ def getAllTestsController():
 
 @app.route('/lista')
 def lista():
-    cur=bd.connection.cursor()
+    cur = bd.connection.cursor()
     cur.execute('SELECT*FROM test')
-    data=cur.fetchall()
-    
-    return render_template('auth/lista_tests.html',tests=data)
+    data = cur.fetchall()
+
+    return render_template('auth/lista_tests.html', tests=data)
+
+@app.route('/results/<id>', methods=['GET'])
+def getResultDiagnosisView(id):
+    data=  getTestById(id)
+    jsonData = data.get_json()
+    route = ''
+   
+    if(jsonData['result_label'] == 'RIESGO BAJO'):
+        route = 'result_bajo.html'
+    elif(jsonData['result_label'] == 'RIESGO NORMAL'):
+        route = 'result_normal.html'
+    elif(jsonData['result_label'] == 'RIESGO ALTO'):
+        route = 'result_alto.html'
+    elif(jsonData['result_label'] == 'RIESGO CRITICO'):
+        route = 'result_critico.html'
+
+    return render_template('auth/' + route, data=jsonData) 
 
 
 @app.route('/make-diagnosis', methods=['POST'])
@@ -168,11 +186,17 @@ def makeDiagnosis():
         "alimentation": alimentation,
         "glucose": glucose,
         "genetical": genetical,
-        "physicalActivity": physicalActivity
+        "physicalActivity": physicalActivity,
+        "name": body['name'],
+        "age": body['age'],
+        "document_number": body['document_number']
     }
-    data=createTest(newJson)
-    #createTest(newJson)
-    return render_template('auth/result_bajo.html',data=data)
+    data =  createTest(newJson)
+    jsonData = data.get_json()
+    # createTest(newJson)
+    return redirect(url_for('.getResultDiagnosisView', id=jsonData['id']))
+    # return render_template('auth/result_bajo.html', data=data)
+
 
 
 if __name__ == '__main__':

@@ -839,7 +839,7 @@ def createTest(body):
     if (criticalPertenenceGrade > lowPertenenceGrade and criticalPertenenceGrade > midPertenenceGrade and criticalPertenenceGrade > highPertenenceGrade):
         labelValue = "RIESGO CRITICO"
 
-    newTest = Test().setAlimentation(alimentation).setGenetical(
+    newTest = Test().setName(body['name']).setAge(int(body['age'])).setDocumentNumber(body['document_number']).setAlimentation(alimentation).setGenetical(
         genetical).setGlucose(glucose).setPhysicalActivity(physicalActivity).setAbsoluteValue(centroidAbsoluteValue).setLowPertenenceGrade(lowPertenenceGrade).setMidPertenenceGrade(midPertenenceGrade).setHighPertenenceGrade(highPertenenceGrade).setCriticalPertenenceGrade(criticalPertenenceGrade).setResultLabel(labelValue).setUserId(1)
 
     db.session.add(newTest)
