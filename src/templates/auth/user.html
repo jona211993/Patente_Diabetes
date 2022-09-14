@@ -14,7 +14,7 @@
     <div class="p-2">
       <ul class="navega">
         <li><a class="navega" aria-current="page" href="user">Inicio</a></li>
-        <li><a class="navega" aria-current="page" href="#">Mis Tests</a></li>
+        <li><a class="navega" aria-current="page" href="#">Lista de Tests</a></li>
         <li><a class="navega" aria-current="page" href="test">Nuevo Test</a></li>
       </ul>
     </div>
@@ -55,14 +55,12 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="#">Mi Perfil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Salir</a>
+            <a class="nav-link" href="{{ url_for('logout') }}">Salir</a>
           </li>
         </ul>
       </div>

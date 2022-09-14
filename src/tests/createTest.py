@@ -573,11 +573,7 @@ def createTest(body):
                             np.fmin(u_leve, u_a_bajo))
     # Clipping en la regla 57
     salida_activation_57 = np.fmin(active_rule57, normal)
-    plt.style.use('default')
-    fig = plt.figure(figsize=(6, 4))
-    plt.plot(x_riesgo, salida_activation_57)
-    plt.axis([0, 1, 0, 1])
-    plt.show()
+   
 
     # REGLA 58:
     active_rule58 = np.fmin(np.fmin(u_mucho, u_g_normal),
@@ -639,11 +635,7 @@ def createTest(body):
                             np.fmin(u_ninguno, u_a_bajo))
     # Clipping en la regla 63
     salida_activation_63 = np.fmin(active_rule63, normal)
-    plt.style.use('default')
-    fig = plt.figure(figsize=(6, 4))
-    plt.plot(x_riesgo, salida_activation_63)
-    plt.axis([0, 1, 0, 1])
-    plt.show()
+    
 
     # REGLA 64:
     active_rule64 = np.fmin(np.fmin(u_mucho, u_preocupante),

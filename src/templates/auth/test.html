@@ -12,8 +12,8 @@ block customCSS %}
     </div>
     <div class="p-2">
       <ul class="navega">
-        <li><a class="navega" aria-current="page" href="test">Inicio</a></li>
-        <li><a class="navega" aria-current="page" href="#">Mis Tests</a></li>
+        <li><a class="navega" aria-current="page" href="user">Inicio</a></li>
+        <li><a class="navega" aria-current="page" href="#">Lista de Tests</a></li>
         <li>
           <a class="navega" aria-current="page" href="test">Nuevo Test</a>
         </li>
@@ -57,9 +57,6 @@ block customCSS %}
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#">Mi Perfil</a>
           </li>
           <li class="nav-item">
@@ -74,7 +71,30 @@ block customCSS %}
 <form class="formulario" method="post" action="/make-diagnosis">
   <div class="espacio">
     <h1 class="titulo">Test de Porcentaje de Riesgo Diabetes</h1>
-    <div>
+    <br>
+    <div class="variable">
+      <label class="form-label-v">DATOS DEL PARTICIPANTE</label>
+    </div>
+    <br>
+    <div class="input_datos_n">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Nombre: </span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+    <div class="input_datos_dni">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">D.N.I </span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+    <div class="input_datos_edad">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Edad </span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+    <div class="contenedor_a">
       <div class="variable">
         <label class="form-label-v">Alimentación</label>
       </div>

@@ -1,0 +1,126 @@
+{% extends 'auth/user.html' %} {% block title %} Test Diabetes {%endblock %} {%
+    block customCSS %}
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/user.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/test.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/result.css')}}" />
+    {% endblock %} {% block body %}
+    <nav class="navbar navbar-dark bg-dark fixed-top navbar-light bg-light">
+      <div class="container-fluid d-flex mb-3">
+        <div class="me-auto p-2">
+          <a class="navbar-brand"
+            >Bienvenido {% block name_user %} {% endblock %}
+          </a>
+        </div>
+        <div class="p-2">
+          <ul class="navega">
+            <li><a class="navega" aria-current="page" href="user">Inicio</a></li>
+            <li><a class="navega" aria-current="page" href="#">Lista de Tests</a></li>
+            <li>
+              <a class="navega" aria-current="page" href="test">Nuevo Test</a>
+            </li>
+          </ul>
+        </div>
+        <div class="p-2">
+          <button
+            class="navbar-toggler p-2 flex-shrink-1"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt=""
+              width="32"
+              height="32"
+              class="rounded-circle me-2"
+            />
+          </button>
+        </div>
+    
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+              Test_Diabetes
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Mi Perfil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Salir</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% block panel %}
+    <div class="panel">
+       <div class="cuerpo-panel">
+            <div class="riesgo-3"><h1>RIESGO ALTO</h1> </div>
+            <div class="mensaje">
+                Es posible que padezca diabetes en el futuro.
+                <br>
+                Debes tomar acciones pronto para combatir este riesgo latente.
+                <br>
+                Necesitas llevar un mayor control en tus comidas y estilo de vida.
+            </div>
+       </div> 
+       <div class="row">
+            <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Alimentación</h5>
+                <p class="card-text">Recuerda consumir frutas y verduras todos los días.</p>
+                <p class="card-text">Evita las grasas y azúcares.</p>
+                <p class="card-text">Come más alimentos ricos en fibra.</p>
+                <p class="card-text">Una buen práctica sería llevar un control de calorías, no demasiado estricto.</p>
+                                                              
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Actividad Física</h5>
+                <p class="card-text">Realiza más ejercicio físico a diario. No es necesario asistir a un gimnasio, con hacer 10-15 minutos de 
+                    actividad física en casa es suficiente!.</p>
+                <p class="card-text">Tampoco debes hacer rutinas complejas, haz los ejercicios físicos que te gusten y puedas realizar!</p>
+                <p class="card-text">Lo importante es hacerlos!.</p>              
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Consejos Finales (Generales)</h5>
+                    <p class="card-text">Ten en mente acudir a un endocrinólogo para realizarte estudios.</p>
+                    <p class="card-text">Aún estás a tiempo de tomar medidas contra la diabetes, de ti depende!.</p>                                   
+                   
+                </div>
+                </div>
+            </div>
+
+       </div>
+       <div class="boton_a">
+        <a href="user"><button type="button" class="btn btn-primary btn-lg btn-block">Aceptar</button></a>
+      </div>
+    </div>
+   
+    {%endblock %} {% endblock %} {% block footer %}
+    <!-- <footer class="footer">FISI- UNMSM 2022</footer> -->
+    {% endblock %}

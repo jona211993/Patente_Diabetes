@@ -31,6 +31,7 @@
     margin-left: 10px;
     margin-right: 10px;
     font-size: 14px;
+   
 }
 .variable{
     text-align: left;
@@ -88,4 +89,18 @@
 }
 .p-2{
     display: inline-block;
+}
+.input_datos_n{
+    width:90%;
+    
+}
+.input_datos_dni{
+    width:50%;
+}
+.input_datos_edad{
+    width:20%;
+}
+.contenedor_a{
+    background-color:white;
+    height: 490 px;
 }
