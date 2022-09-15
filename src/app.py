@@ -118,12 +118,12 @@ def status_404(error):
 
 
 @app.route('/usuario/pruebas/<userId>', methods=['GET'])
-def getTestsByUserId(userId):
+def obtenerPruebasPorUsuarioId(userId):
     return obtenerPruebaPorIdDelUsuario(userId)
 
 
 @app.route('/prueba/<testId>', methods=['GET', 'DELETE'])
-def getTestByIdController(testId):
+def obtenerPruebaPorIdControlador(testId):
     if request.method == 'GET':
         return obtenerPruebaPorId(testId)
     elif request.method == 'DELETE':
@@ -131,7 +131,7 @@ def getTestByIdController(testId):
 
 
 @app.route('/pruebas', methods=['GET'])
-def getAllTestsController():
+def obtenerTodasPruebasControlador():
     return obtenerTodasPruebas()
 
 
@@ -143,8 +143,8 @@ def lista():
 
     return render_template('auth/lista_pruebas.html', pruebas=data)
 
-@app.route('/results/<id>', methods=['GET'])
-def getResultDiagnosisView(id):
+@app.route('/resultados/<id>', methods=['GET'])
+def obtenerResultadosDiagnosticoVista(id):
     data=  obtenerPruebaPorId(id)
     jsonData = data.get_json()
     route = ''
@@ -161,8 +161,8 @@ def getResultDiagnosisView(id):
     return render_template('auth/' + route, data=jsonData) 
 
 
-@app.route('/make-diagnosis', methods=['POST'])
-def makeDiagnosis():
+@app.route('/hacer-diagnostico', methods=['POST'])
+def hacerDiagnostico():
     body = request.form
 
     comida = (int(body['comida1']) + int(body['comida2']) +
@@ -185,7 +185,7 @@ def makeDiagnosis():
     data =  crearPrueba(newJson)
     jsonData = data.get_json()
     # crearPrueba(newJson)
-    return redirect(url_for('.getResultDiagnosisView', id=jsonData['id']))
+    return redirect(url_for('.obtenerResultadosDiagnosticoVista', id=jsonData['id']))
     # return render_template('auth/resultado_bajo.html', data=data)
 
 
