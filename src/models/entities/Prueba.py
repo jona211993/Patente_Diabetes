@@ -6,7 +6,7 @@ from run import db, ma
 class Prueba(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
-    name = db.Column(db.String(255), nullable = False)
+    nombre = db.Column(db.String(255), nullable = False)
     numero_documento_dni = db.Column(db.String(8), nullable = False)
     edad = db.Column(db.Integer, nullable = False)
 
@@ -25,8 +25,8 @@ class Prueba(db.Model):
 
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
 
-    def setNombre(self, name):
-        self.name = name
+    def setNombre(self, nombre):
+        self.nombre = nombre
         return self
 
     def setNumeroDocumentoDni(self, numero_documento_dni):
@@ -85,7 +85,7 @@ class Prueba(db.Model):
 
 class PruebaEsquema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'numero_documento_dni', 'edad', 'comida', 'herencia', 'glucosa', 'ejercicio', 'valor_absoluto',
+        fields = ('id', 'nombre', 'numero_documento_dni', 'edad', 'comida', 'herencia', 'glucosa', 'ejercicio', 'valor_absoluto',
                   'grado_pertenencia_bajo', 'grado_pertenencia_normal', 'grado_pertenencia_alto', 'grado_pertenencia_critico'
                   'valor_absoluto'
                   'grado_pertenencia_bajo'

@@ -25,7 +25,7 @@ from pruebas.obtenerPruebaPorIdDelUsuario import obtenerPruebaPorIdDelUsuario
 from users.login import loginNormal
 
 
-#db.drop_all()
+# db.drop_all()
 db.create_all()
 
 # csrf = CSRFProtect()
@@ -42,7 +42,7 @@ def index():
 
 @app.route('/a')
 def a():
-    return render_template('auth/result_bajo.html')
+    return render_template('auth/resultado_bajo.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -117,7 +117,7 @@ def status_404(error):
     return "<h1>Página no encontrada</h1>", 404
 
 
-@app.route('/usuario/tests/<userId>', methods=['GET'])
+@app.route('/usuario/pruebas/<userId>', methods=['GET'])
 def getTestsByUserId(userId):
     return obtenerPruebaPorIdDelUsuario(userId)
 
@@ -130,7 +130,7 @@ def getTestByIdController(testId):
         return eliminarPruebaPorId(testId)
 
 
-@app.route('/tests', methods=['GET'])
+@app.route('/pruebas', methods=['GET'])
 def getAllTestsController():
     return obtenerTodasPruebas()
 
@@ -141,7 +141,7 @@ def lista():
     cur.execute('SELECT*FROM prueba')
     data = cur.fetchall()
 
-    return render_template('auth/lista_tests.html', tests=data)
+    return render_template('auth/lista_pruebas.html', pruebas=data)
 
 @app.route('/results/<id>', methods=['GET'])
 def getResultDiagnosisView(id):
@@ -150,13 +150,13 @@ def getResultDiagnosisView(id):
     route = ''
    
     if(jsonData['texto_resultado'] == 'RIESGO BAJO'):
-        route = 'result_bajo.html'
+        route = 'resultado_bajo.html'
     elif(jsonData['texto_resultado'] == 'RIESGO NORMAL'):
-        route = 'result_normal.html'
+        route = 'resultado_normal.html'
     elif(jsonData['texto_resultado'] == 'RIESGO ALTO'):
-        route = 'result_alto.html'
+        route = 'resultado_alto.html'
     elif(jsonData['texto_resultado'] == 'RIESGO CRITICO'):
-        route = 'result_critico.html'
+        route = 'resultado_critico.html'
 
     return render_template('auth/' + route, data=jsonData) 
 
@@ -165,20 +165,20 @@ def getResultDiagnosisView(id):
 def makeDiagnosis():
     body = request.form
 
-    comida = (int(body['alimentation1']) + int(body['alimentation2']) +
-                    int(body['alimentation3']) + int(body['alimentation4']) + int(body['alimentation5'])) / 5
-    herencia = (int(body['genetical1']) + int(body['genetical2']) + int(
-        body['genetical3']) + int(body['genetical4']) + int(body['genetical5']))
+    comida = (int(body['comida1']) + int(body['comida2']) +
+                    int(body['comida3']) + int(body['comida4']) + int(body['comida5'])) / 5
+    herencia = (int(body['herencia1']) + int(body['herencia2']) + int(
+        body['herencia3']) + int(body['herencia4']) + int(body['herencia5']))
     glucosa = int(body['glucosa'])
-    ejercicio = (int(body['physicalActivity1']) + int(
-        body['physicalActivity2']) + int(body['physicalActivity3'])) / 3
+    ejercicio = (int(body['ejercicio1']) + int(
+        body['ejercicio2']) + int(body['ejercicio3'])) / 3
 
     newJson = {
         "comida": comida,
         "glucosa": glucosa,
         "herencia": herencia,
         "ejercicio": ejercicio,
-        "name": body['name'],
+        "nombre": body['nombre'],
         "edad": body['edad'],
         "numero_documento_dni": body['numero_documento_dni']
     }
@@ -186,7 +186,7 @@ def makeDiagnosis():
     jsonData = data.get_json()
     # crearPrueba(newJson)
     return redirect(url_for('.getResultDiagnosisView', id=jsonData['id']))
-    # return render_template('auth/result_bajo.html', data=data)
+    # return render_template('auth/resultado_bajo.html', data=data)
 
 
 

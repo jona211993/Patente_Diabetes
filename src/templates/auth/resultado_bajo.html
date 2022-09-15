@@ -2,7 +2,7 @@
     block customCSS %}
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/usuario.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/prueba.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/result.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/resultado.css')}}" />
     {% endblock %} {% block body %}
     <nav class="navbar navbar-dark bg-dark fixed-top navbar-light bg-light">
       <div class="container-fluid d-flex mb-3">
@@ -71,13 +71,13 @@
     {% block panel %}
     <div class="panel">
        <div class="cuerpo-panel">
-            <div class="riesgo-3"><h1>RIESGO ALTO</h1> </div>
+            <div class="riesgo-1"><h1>RIESGO BAJO</h1> </div>
             <div class="mensaje">
-                Es posible que padezca diabetes en el futuro.
+                Estás haciendo un buen trabajo!
                 <br>
-                Debes tomar acciones pronto para combatir este riesgo latente.
+                 Cuida tu alimentación y haz ejercico.
                 <br>
-                Necesitas llevar un mayor control en tus comidas y estilo de vida.
+                Bien po ti!.
             </div>
        </div> 
        <div class="row">
@@ -86,10 +86,11 @@
                 <div class="card-body">
                 <h5 class="card-title">Alimentación</h5>
                 <p class="card-text">Recuerda consumir frutas y verduras todos los días.</p>
-                <p class="card-text">Evita las grasas y azúcares.</p>
-                <p class="card-text">Come más alimentos ricos en fibra.</p>
-                <p class="card-text">Una buen práctica sería llevar un control de calorías, no demasiado estricto.</p>
-                                                              
+                <p class="card-text">Lleva una dieta rica en:</p>
+                <p class="card-text"> - Fibra</p>
+                <p class="card-text"> - Proteína</p>
+                <p class="card-text">Evita consumir grasas.</p>
+                                                                           
                 </div>
             </div>
             </div>
@@ -97,10 +98,8 @@
             <div class="card">
                 <div class="card-body">
                 <h5 class="card-title">Actividad Física</h5>
-                <p class="card-text">Realiza más ejercicio físico a diario. No es necesario asistir a un gimnasio, con hacer 10-15 minutos de 
-                    actividad física en casa es suficiente!.</p>
-                <p class="card-text">Tampoco debes hacer rutinas complejas, haz los ejercicios físicos que te gusten y puedas realizar!</p>
-                <p class="card-text">Lo importante es hacerlos!.</p>              
+                <p class="card-text">Mantente realizando ejercicios físicos semanales.</p>
+                <p class="card-text">No es necesario ir al gimnasio, con hacer 10 minutos de ejercicio en casa es suficiente!</p>
                 </div>
             </div>
             </div>
@@ -108,8 +107,8 @@
                 <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Consejos Finales (Generales)</h5>
-                    <p class="card-text">Ten en mente acudir a un endocrinólogo para realizarte estudios.</p>
-                    <p class="card-text">Aún estás a tiempo de tomar medidas contra la diabetes, de ti depende!.</p>                                   
+                    <p class="card-text">Lo has hecho bien hasta ahora!</p>
+                    <p class="card-text">¡Felicitaciones!.</p>                                   
                    
                 </div>
                 </div>
@@ -118,7 +117,7 @@
        </div>
        <div class="boton_a">
         <a href="/usuario"><button type="button" class="btn btn-primary btn-lg btn-block">Aceptar</button></a>
-      </div>
+       </div>
     </div>
    
     {%endblock %} {% endblock %} {% block footer %}

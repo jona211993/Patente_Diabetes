@@ -1,6 +1,6 @@
 
 from flask_login import UserMixin
-# from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from run import db, ma
 
 
@@ -14,7 +14,7 @@ class Usuario(db.Model, UserMixin):
     edad = db.Column(db.Integer, nullable=False)
     correo_electronico = db.Column(db.String(255), unique=True, nullable=False)
     sexo = db.Column(db.String(1), nullable=False)
-    tests = db.relationship('Prueba', backref='usuario', lazy=True)
+    pruebas = db.relationship('Prueba', backref='usuario', lazy=True)
 
     def __init__(self, id, nombre_usuario, contrasenia, nombres="") -> None:
         self.id = id
@@ -85,7 +85,7 @@ class Usuario(db.Model, UserMixin):
 class UsuarioEsquema(ma.Schema):
     class Meta:
         fields = ('id', 'nombre_usuario', 'nombres', 'numero_documento_dni',
-                  'edad', 'correo_electronico', 'sexo', 'tests')
+                  'edad', 'correo_electronico', 'sexo', 'pruebas')
 
 
 usuario_esquema = UsuarioEsquema()

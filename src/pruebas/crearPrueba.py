@@ -839,7 +839,7 @@ def crearPrueba(body):
     if (gradoPertenenciaCritica > gradoPertenenciaBaja and gradoPertenenciaCritica > gradoPertenenciaNormal and gradoPertenenciaCritica > gradoPertenenciaAlta):
         textoResultado = "RIESGO CRITICO"
 
-    nuevaPrueba = Prueba().setNombre(body['name']).setEdad(int(body['edad'])).setNumeroDocumentoDni(body['numero_documento_dni']).setComida(comida).setHerencia(
+    nuevaPrueba = Prueba().setNombre(body['nombre']).setEdad(int(body['edad'])).setNumeroDocumentoDni(body['numero_documento_dni']).setComida(comida).setHerencia(
         herencia).setGlucosa(glucosa).setEjercicio(ejercicio).setValorAbsoluto(centroideValorAbsoluto).setGradoPertenenciaBajo(gradoPertenenciaBaja).setGradoPertenenciaNormal(gradoPertenenciaNormal).setGradoPertenenciaAlto(gradoPertenenciaAlta).setGradoPertenenciaCritico(gradoPertenenciaCritica).setTextoResultado(textoResultado).setUsuarioId(1)
 
     db.session.add(nuevaPrueba)
