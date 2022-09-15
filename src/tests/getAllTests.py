@@ -1,7 +1,7 @@
 from run import app, db
-from models.entities.Prueba import Prueba, tests_schema
+from models.entities.Prueba import Prueba, pruebas_esquema
 from sqlalchemy import desc
 
 def getAllTests():
     allTests = Prueba.query.order_by(desc(Prueba.id)).all()
-    return tests_schema.jsonify(allTests)
+    return pruebas_esquema.jsonify(allTests)

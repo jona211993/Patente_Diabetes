@@ -1,5 +1,5 @@
 from run import app, db
-from models.entities.Prueba import Prueba, test_schema
+from models.entities.Prueba import Prueba, prueba_esquema
 
 def deleteTestById(testId):
     test = Prueba.query.get(testId)
@@ -11,4 +11,4 @@ def deleteTestById(testId):
 
     db.session.delete(test)
     db.session.commit()
-    return test_schema.jsonify(test)
+    return prueba_esquema.jsonify(test)

@@ -2,13 +2,13 @@ import matplotlib.pyplot as plt
 import skfuzzy as fuzz
 import numpy as np
 from run import app, db
-from models.entities.Prueba import Prueba, test_schema
+from models.entities.Prueba import Prueba, prueba_esquema
 
 
 def createTest(body):
-    alimentation = body['alimentation']
-    genetical = body['genetical']
-    glucose = body['glucose']
+    comida = body['comida']
+    herencia = body['herencia']
+    glucosa = body['glucosa']
     physicalActivity = body['physicalActivity']
 
     # Rango de la alimentación
@@ -75,17 +75,17 @@ def createTest(body):
 
     # Añadimos las funciones anteriores al dominio de cada variable de entrada
     # En la funcion se manda Vector de los X , luego la funcion , el valor de entrada
-    u_nada = fuzz.interp_membership(x_alimentacion, nada, alimentation)
-    u_poco = fuzz.interp_membership(x_alimentacion, poco, alimentation)
-    u_mucho = fuzz.interp_membership(x_alimentacion, mucho, alimentation)
+    u_nada = fuzz.interp_membership(x_alimentacion, nada, comida)
+    u_poco = fuzz.interp_membership(x_alimentacion, poco, comida)
+    u_mucho = fuzz.interp_membership(x_alimentacion, mucho, comida)
 
-    u_g_normal = fuzz.interp_membership(x_glucosa, g_normal, glucose)
-    u_preocupante = fuzz.interp_membership(x_glucosa, preocupante, glucose)
-    u_muy_preocu = fuzz.interp_membership(x_glucosa, muy_preocu, glucose)
+    u_g_normal = fuzz.interp_membership(x_glucosa, g_normal, glucosa)
+    u_preocupante = fuzz.interp_membership(x_glucosa, preocupante, glucosa)
+    u_muy_preocu = fuzz.interp_membership(x_glucosa, muy_preocu, glucosa)
 
-    u_ninguno = fuzz.interp_membership(x_genetica, ninguno, genetical)
-    u_leve = fuzz.interp_membership(x_genetica, leve, genetical)
-    u_grave = fuzz.interp_membership(x_genetica, grave, genetical)
+    u_ninguno = fuzz.interp_membership(x_genetica, ninguno, herencia)
+    u_leve = fuzz.interp_membership(x_genetica, leve, herencia)
+    u_grave = fuzz.interp_membership(x_genetica, grave, herencia)
 
     u_a_bajo = fuzz.interp_membership(x_a_fisica, a_bajo, physicalActivity)
     u_a_normal = fuzz.interp_membership(x_a_fisica, a_normal, physicalActivity)
@@ -839,10 +839,10 @@ def createTest(body):
     if (criticalPertenenceGrade > lowPertenenceGrade and criticalPertenenceGrade > midPertenenceGrade and criticalPertenenceGrade > highPertenenceGrade):
         labelValue = "RIESGO CRITICO"
 
-    newTest = Prueba().setName(body['name']).setAge(int(body['age'])).setDocumentNumber(body['document_number']).setAlimentation(alimentation).setGenetical(
-        genetical).setGlucose(glucose).setPhysicalActivity(physicalActivity).setAbsoluteValue(centroidAbsoluteValue).setLowPertenenceGrade(lowPertenenceGrade).setMidPertenenceGrade(midPertenenceGrade).setHighPertenenceGrade(highPertenenceGrade).setCriticalPertenenceGrade(criticalPertenenceGrade).setResultLabel(labelValue).setUserId(1)
+    newTest = Prueba().setNombre(body['name']).setEdad(int(body['edad'])).setNumeroDocumentoDni(body['numero_documento_dni']).setComida(comida).setHerencia(
+        herencia).setGlucosa(glucosa).setEjercicio(physicalActivity).setValorAbsoluto(centroidAbsoluteValue).setGradoPertenenciaBajo(lowPertenenceGrade).setGradoPertenenciaNormal(midPertenenceGrade).setGradoPertenenciaAlto(highPertenenceGrade).setGradoPertenenciaCritico(criticalPertenenceGrade).setTextoResultado(labelValue).setUsuarioId(1)
 
     db.session.add(newTest)
     db.session.commit()
 
-    return test_schema.jsonify(newTest)
+    return prueba_esquema.jsonify(newTest)

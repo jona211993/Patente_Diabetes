@@ -16,7 +16,7 @@ from run import app, db, login_manager, bd
 
 
 from models.entities.User import User, users_schema
-from models.entities.Prueba import Prueba, test_schema, tests_schema
+from models.entities.Prueba import Prueba, prueba_esquema, pruebas_esquema
 from tests.createTest import createTest
 from tests.deleteTestById import deleteTestById
 from tests.getAllTests import getAllTests
@@ -149,13 +149,13 @@ def getResultDiagnosisView(id):
     jsonData = data.get_json()
     route = ''
    
-    if(jsonData['result_label'] == 'RIESGO BAJO'):
+    if(jsonData['texto_resultado'] == 'RIESGO BAJO'):
         route = 'result_bajo.html'
-    elif(jsonData['result_label'] == 'RIESGO NORMAL'):
+    elif(jsonData['texto_resultado'] == 'RIESGO NORMAL'):
         route = 'result_normal.html'
-    elif(jsonData['result_label'] == 'RIESGO ALTO'):
+    elif(jsonData['texto_resultado'] == 'RIESGO ALTO'):
         route = 'result_alto.html'
-    elif(jsonData['result_label'] == 'RIESGO CRITICO'):
+    elif(jsonData['texto_resultado'] == 'RIESGO CRITICO'):
         route = 'result_critico.html'
 
     return render_template('auth/' + route, data=jsonData) 
@@ -165,22 +165,22 @@ def getResultDiagnosisView(id):
 def makeDiagnosis():
     body = request.form
 
-    alimentation = (int(body['alimentation1']) + int(body['alimentation2']) +
+    comida = (int(body['alimentation1']) + int(body['alimentation2']) +
                     int(body['alimentation3']) + int(body['alimentation4']) + int(body['alimentation5'])) / 5
-    genetical = (int(body['genetical1']) + int(body['genetical2']) + int(
+    herencia = (int(body['genetical1']) + int(body['genetical2']) + int(
         body['genetical3']) + int(body['genetical4']) + int(body['genetical5']))
-    glucose = int(body['glucose'])
+    glucosa = int(body['glucosa'])
     physicalActivity = (int(body['physicalActivity1']) + int(
         body['physicalActivity2']) + int(body['physicalActivity3'])) / 3
 
     newJson = {
-        "alimentation": alimentation,
-        "glucose": glucose,
-        "genetical": genetical,
+        "comida": comida,
+        "glucosa": glucosa,
+        "herencia": herencia,
         "physicalActivity": physicalActivity,
         "name": body['name'],
-        "age": body['age'],
-        "document_number": body['document_number']
+        "edad": body['edad'],
+        "numero_documento_dni": body['numero_documento_dni']
     }
     data =  createTest(newJson)
     jsonData = data.get_json()

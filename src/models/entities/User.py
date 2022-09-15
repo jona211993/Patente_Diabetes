@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255))
     fullname = db.Column(db.String(255))
     documentNumber = db.Column(db.String(8), nullable=False)
-    age = db.Column(db.Integer, nullable=False)
+    edad = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     sex = db.Column(db.String(1), nullable=False)
     tests = db.relationship('Prueba', backref='user', lazy=True)
@@ -39,13 +39,13 @@ class User(db.Model, UserMixin):
         self.fullname = fullname
         return self
 
-    def setDocumentNumber(self, documentNumber):
+    def setNumeroDocumentoDni(self, documentNumber):
         self.documentNumber = documentNumber
         return self
 
-    def setAge(self, age):
-        self.age = age
-        return age
+    def setEdad(self, edad):
+        self.edad = edad
+        return edad
 
     def setEmail(self, email):
         self.email = email
@@ -85,7 +85,7 @@ class User(db.Model, UserMixin):
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'username', 'fullname', 'documentNumber',
-                  'age', 'email', 'sex', 'tests')
+                  'edad', 'email', 'sex', 'tests')
 
 
 user_schema = UserSchema()
