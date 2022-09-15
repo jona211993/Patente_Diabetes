@@ -10,6 +10,7 @@ body , html{
     flex: 0 0 100%;
     width: 100%;
     object-fit: cover;
+    margin-top: 98px;
 }
 .img_slider{
     display: block;
@@ -33,4 +34,7 @@ body , html{
 .navega li{
     display: inline;
     
+}
+.carousel slide{
+    margin-top: 98px;
 }

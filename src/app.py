@@ -25,7 +25,7 @@ from tests.getTestsByUserId import getTestByUserId
 from users.login import loginNormal
 
 
-# db.drop_all()
+#db.drop_all()
 db.create_all()
 
 # csrf = CSRFProtect()
@@ -40,6 +40,10 @@ def load_user(id):
 def index():
     return redirect(url_for('login'))
 
+@app.route('/a')
+def a():
+    return render_template('auth/result_bajo.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -49,11 +53,7 @@ def login():
 
     elif request.method == 'POST':
         print(request.form)
-
-        # user = User(0, request.form['username'], request.form['password'])
-
-        # user = User.setUsername(request.form['username']).setPassword(
-        #     request.form['password'])
+        
         logged_user = ModelUser.login(
             request.form['username'], request.form['password'])
         if logged_user == None:
@@ -61,14 +61,9 @@ def login():
             return render_template('auth/login.html')
 
         else:
-            # print(logged_user)
-            # flash('Logged in successfully.')
-            # login_user(logged_user)
+           
             return redirect(url_for('user'))
-        # else:
-        #     print("Contraseña Incorrecta...")
-        #     return render_template('auth/login.html')
-
+        
 
 @app.route('/login-json', methods=['GET', 'POST'])
 @login_manager.user_loader
@@ -102,10 +97,6 @@ def logout():
 def inicio():
     return render_template('auth/layout.html')
 
-# @app.route('/protected')
-# @login_required
-# def protected():
-#     return "<h1>Esta es una vista protegida, solo para usuarios autenticados.</h1>"
 
 
 @app.route('/user')
