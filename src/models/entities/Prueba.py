@@ -23,7 +23,7 @@ class Prueba(db.Model):
 
     texto_resultado = db.Column(db.String(31), nullable=False)
 
-    usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
 
     def setNombre(self, name):
         self.name = name
@@ -50,8 +50,8 @@ class Prueba(db.Model):
         self.glucosa = glucosa
         return self
 
-    def setEjercicio(self, physicalActivity):
-        self.ejercicio = physicalActivity
+    def setEjercicio(self, ejercicio):
+        self.ejercicio = ejercicio
         return self
 
     def setValorAbsoluto(self, absoluteValue):

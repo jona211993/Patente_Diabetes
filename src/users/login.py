@@ -1,11 +1,11 @@
-from models.entities.User import User
+from models.entities.Usuario import Usuario
 from run import db
 
 
-def loginNormal(username, password):
-    user = User.query.get(username == username)
-    print("USAWEA", user)
-    if user != None:
-        return user
+def loginNormal(nombre_usuario, contrasenia):
+    usuario = Usuario.query.get(nombre_usuario == nombre_usuario)
+    print("USAWEA", usuario)
+    if usuario != None:
+        return usuario
     else:
         return None

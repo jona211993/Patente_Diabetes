@@ -8,20 +8,20 @@ import matplotlib.pyplot as plt
 import skfuzzy as fuzz
 import numpy as np
 from flask import Flask, request, flash
-from models.ModelUser import ModelUser
+from models.ModeloUsuario import ModeloUsuario
 from flask_login import LoginManager, login_user, logout_user, login_required
 
 
 from run import app, db, login_manager, bd
 
 
-from models.entities.User import User, users_schema
+from models.entities.Usuario import Usuario, usuarios_esquema
 from models.entities.Prueba import Prueba, prueba_esquema, pruebas_esquema
-from tests.createTest import createTest
-from tests.deleteTestById import deleteTestById
-from tests.getAllTests import getAllTests
-from tests.getTestById import getTestById
-from tests.getTestsByUserId import getTestByUserId
+from pruebas.crearPrueba import crearPrueba
+from pruebas.eliminarPruebaPorId import eliminarPruebaPorId
+from pruebas.obtenerTodasPruebas import obtenerTodasPruebas
+from pruebas.obtenerPruebaPorId import obtenerPruebaPorId
+from pruebas.obtenerPruebaPorIdDelUsuario import obtenerPruebaPorIdDelUsuario
 from users.login import loginNormal
 
 
@@ -33,7 +33,7 @@ db.create_all()
 
 @login_manager.user_loader
 def load_user(id):
-    return ModelUser.get_by_id(db, id)
+    return ModeloUsuario.obtener_por_id(db, id)
 
 
 @app.route('/')
@@ -54,31 +54,31 @@ def login():
     elif request.method == 'POST':
         print(request.form)
         
-        logged_user = ModelUser.login(
-            request.form['username'], request.form['password'])
+        logged_user = ModeloUsuario.login(
+            request.form['nombre_usuario'], request.form['contrasenia'])
         if logged_user == None:
             print("Usuario no Encontrado...")
             return render_template('auth/login.html')
 
         else:
            
-            return redirect(url_for('user'))
+            return redirect(url_for('usuario'))
         
 
 @app.route('/login-json', methods=['GET', 'POST'])
 @login_manager.user_loader
-def loginJson(user):
+def loginJson(usuario):
     if request.method != 'POST':
         return render_template('auth/login.html')
 
     body = request.json
 
-    logged_user = loginNormal(body['username'], body['password'])
+    logged_user = loginNormal(body['nombre_usuario'], body['contrasenia'])
     if logged_user == None:
         flash("Usuario no Encontrado...")
         return render_template('auth/login.html')
 
-    if logged_user.password:
+    if logged_user.contrasenia:
         login_user(logged_user)
         return redirect(url_for('inicio'))
     else:
@@ -99,14 +99,14 @@ def inicio():
 
 
 
-@app.route('/user')
-def user():
-    return render_template('auth/user.html')
+@app.route('/usuario')
+def usuario():
+    return render_template('auth/usuario.html')
 
 
-@app.route('/test')
-def test():
-    return render_template('auth/test.html')
+@app.route('/prueba')
+def prueba():
+    return render_template('auth/prueba.html')
 
 
 def status_401(error):
@@ -117,35 +117,35 @@ def status_404(error):
     return "<h1>Página no encontrada</h1>", 404
 
 
-@app.route('/user/tests/<userId>', methods=['GET'])
+@app.route('/usuario/tests/<userId>', methods=['GET'])
 def getTestsByUserId(userId):
-    return getTestByUserId(userId)
+    return obtenerPruebaPorIdDelUsuario(userId)
 
 
-@app.route('/test/<testId>', methods=['GET', 'DELETE'])
+@app.route('/prueba/<testId>', methods=['GET', 'DELETE'])
 def getTestByIdController(testId):
     if request.method == 'GET':
-        return getTestById(testId)
+        return obtenerPruebaPorId(testId)
     elif request.method == 'DELETE':
-        return deleteTestById(testId)
+        return eliminarPruebaPorId(testId)
 
 
 @app.route('/tests', methods=['GET'])
 def getAllTestsController():
-    return getAllTests()
+    return obtenerTodasPruebas()
 
 
 @app.route('/lista')
 def lista():
     cur = bd.connection.cursor()
-    cur.execute('SELECT*FROM test')
+    cur.execute('SELECT*FROM prueba')
     data = cur.fetchall()
 
     return render_template('auth/lista_tests.html', tests=data)
 
 @app.route('/results/<id>', methods=['GET'])
 def getResultDiagnosisView(id):
-    data=  getTestById(id)
+    data=  obtenerPruebaPorId(id)
     jsonData = data.get_json()
     route = ''
    
@@ -170,21 +170,21 @@ def makeDiagnosis():
     herencia = (int(body['genetical1']) + int(body['genetical2']) + int(
         body['genetical3']) + int(body['genetical4']) + int(body['genetical5']))
     glucosa = int(body['glucosa'])
-    physicalActivity = (int(body['physicalActivity1']) + int(
+    ejercicio = (int(body['physicalActivity1']) + int(
         body['physicalActivity2']) + int(body['physicalActivity3'])) / 3
 
     newJson = {
         "comida": comida,
         "glucosa": glucosa,
         "herencia": herencia,
-        "physicalActivity": physicalActivity,
+        "ejercicio": ejercicio,
         "name": body['name'],
         "edad": body['edad'],
         "numero_documento_dni": body['numero_documento_dni']
     }
-    data =  createTest(newJson)
+    data =  crearPrueba(newJson)
     jsonData = data.get_json()
-    # createTest(newJson)
+    # crearPrueba(newJson)
     return redirect(url_for('.getResultDiagnosisView', id=jsonData['id']))
     # return render_template('auth/result_bajo.html', data=data)
 

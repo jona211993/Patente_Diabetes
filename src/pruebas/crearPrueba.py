@@ -5,11 +5,11 @@ from run import app, db
 from models.entities.Prueba import Prueba, prueba_esquema
 
 
-def createTest(body):
+def crearPrueba(body):
     comida = body['comida']
     herencia = body['herencia']
     glucosa = body['glucosa']
-    physicalActivity = body['physicalActivity']
+    ejercicio = body['ejercicio']
 
     # Rango de la alimentación
     x_alimentacion = np.arange(0, 8, 0.1)
@@ -87,9 +87,9 @@ def createTest(body):
     u_leve = fuzz.interp_membership(x_genetica, leve, herencia)
     u_grave = fuzz.interp_membership(x_genetica, grave, herencia)
 
-    u_a_bajo = fuzz.interp_membership(x_a_fisica, a_bajo, physicalActivity)
-    u_a_normal = fuzz.interp_membership(x_a_fisica, a_normal, physicalActivity)
-    u_a_alto = fuzz.interp_membership(x_a_fisica, a_alto, physicalActivity)
+    u_a_bajo = fuzz.interp_membership(x_a_fisica, a_bajo, ejercicio)
+    u_a_normal = fuzz.interp_membership(x_a_fisica, a_normal, ejercicio)
+    u_a_alto = fuzz.interp_membership(x_a_fisica, a_alto, ejercicio)
 
     # REGLA 0:
     active_rule0 = np.fmin(np.fmin(u_nada, u_g_normal),
@@ -815,34 +815,34 @@ def createTest(body):
 
     aggregated = np.fmax(A1, np.fmax(A2, A3))
     # la funcion de defuzzificacion son: lom, som,mom, centroid, bisector
-    centroidAbsoluteValue = fuzz.defuzz(x_riesgo, aggregated, 'centroid')
-    y = fuzz.interp_membership(x_riesgo, aggregated, centroidAbsoluteValue)
+    centroideValorAbsoluto = fuzz.defuzz(x_riesgo, aggregated, 'centroid')
+    y = fuzz.interp_membership(x_riesgo, aggregated, centroideValorAbsoluto)
 
     # Hallar el nivel de pertinencia
-    lowPertenenceGrade = fuzz.interp_membership(
-        x_riesgo, bajo, centroidAbsoluteValue)
-    midPertenenceGrade = fuzz.interp_membership(
-        x_riesgo, normal, centroidAbsoluteValue)
-    highPertenenceGrade = fuzz.interp_membership(
-        x_riesgo, alto, centroidAbsoluteValue)
-    criticalPertenenceGrade = fuzz.interp_membership(
-        x_riesgo, critico, centroidAbsoluteValue)
+    gradoPertenenciaBaja = fuzz.interp_membership(
+        x_riesgo, bajo, centroideValorAbsoluto)
+    gradoPertenenciaNormal = fuzz.interp_membership(
+        x_riesgo, normal, centroideValorAbsoluto)
+    gradoPertenenciaAlta = fuzz.interp_membership(
+        x_riesgo, alto, centroideValorAbsoluto)
+    gradoPertenenciaCritica = fuzz.interp_membership(
+        x_riesgo, critico, centroideValorAbsoluto)
 
-    labelValue = ''
+    textoResultado = ''
 
-    if (lowPertenenceGrade > midPertenenceGrade and lowPertenenceGrade > highPertenenceGrade and lowPertenenceGrade > criticalPertenenceGrade):
-        labelValue = 'RIESGO BAJO'
-    if (midPertenenceGrade > lowPertenenceGrade and midPertenenceGrade > highPertenenceGrade and midPertenenceGrade > criticalPertenenceGrade):
-        labelValue = "RIESGO NORMAL"
-    if (highPertenenceGrade > lowPertenenceGrade and highPertenenceGrade > midPertenenceGrade and highPertenenceGrade > criticalPertenenceGrade):
-        labelValue = "RIESGO ALTO"
-    if (criticalPertenenceGrade > lowPertenenceGrade and criticalPertenenceGrade > midPertenenceGrade and criticalPertenenceGrade > highPertenenceGrade):
-        labelValue = "RIESGO CRITICO"
+    if (gradoPertenenciaBaja > gradoPertenenciaNormal and gradoPertenenciaBaja > gradoPertenenciaAlta and gradoPertenenciaBaja > gradoPertenenciaCritica):
+        textoResultado = 'RIESGO BAJO'
+    if (gradoPertenenciaNormal > gradoPertenenciaBaja and gradoPertenenciaNormal > gradoPertenenciaAlta and gradoPertenenciaNormal > gradoPertenenciaCritica):
+        textoResultado = "RIESGO NORMAL"
+    if (gradoPertenenciaAlta > gradoPertenenciaBaja and gradoPertenenciaAlta > gradoPertenenciaNormal and gradoPertenenciaAlta > gradoPertenenciaCritica):
+        textoResultado = "RIESGO ALTO"
+    if (gradoPertenenciaCritica > gradoPertenenciaBaja and gradoPertenenciaCritica > gradoPertenenciaNormal and gradoPertenenciaCritica > gradoPertenenciaAlta):
+        textoResultado = "RIESGO CRITICO"
 
-    newTest = Prueba().setNombre(body['name']).setEdad(int(body['edad'])).setNumeroDocumentoDni(body['numero_documento_dni']).setComida(comida).setHerencia(
-        herencia).setGlucosa(glucosa).setEjercicio(physicalActivity).setValorAbsoluto(centroidAbsoluteValue).setGradoPertenenciaBajo(lowPertenenceGrade).setGradoPertenenciaNormal(midPertenenceGrade).setGradoPertenenciaAlto(highPertenenceGrade).setGradoPertenenciaCritico(criticalPertenenceGrade).setTextoResultado(labelValue).setUsuarioId(1)
+    nuevaPrueba = Prueba().setNombre(body['name']).setEdad(int(body['edad'])).setNumeroDocumentoDni(body['numero_documento_dni']).setComida(comida).setHerencia(
+        herencia).setGlucosa(glucosa).setEjercicio(ejercicio).setValorAbsoluto(centroideValorAbsoluto).setGradoPertenenciaBajo(gradoPertenenciaBaja).setGradoPertenenciaNormal(gradoPertenenciaNormal).setGradoPertenenciaAlto(gradoPertenenciaAlta).setGradoPertenenciaCritico(gradoPertenenciaCritica).setTextoResultado(textoResultado).setUsuarioId(1)
 
-    db.session.add(newTest)
+    db.session.add(nuevaPrueba)
     db.session.commit()
 
-    return prueba_esquema.jsonify(newTest)
+    return prueba_esquema.jsonify(nuevaPrueba)
