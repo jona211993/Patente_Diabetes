@@ -16,7 +16,7 @@ from run import app, db, login_manager, bd
 
 
 from models.entities.User import User, users_schema
-from models.entities.Test import Test, test_schema, tests_schema
+from models.entities.Prueba import Prueba, test_schema, tests_schema
 from tests.createTest import createTest
 from tests.deleteTestById import deleteTestById
 from tests.getAllTests import getAllTests

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import skfuzzy as fuzz
 import numpy as np
 from run import app, db
-from models.entities.Test import Test, test_schema
+from models.entities.Prueba import Prueba, test_schema
 
 
 def createTest(body):
@@ -839,7 +839,7 @@ def createTest(body):
     if (criticalPertenenceGrade > lowPertenenceGrade and criticalPertenenceGrade > midPertenenceGrade and criticalPertenenceGrade > highPertenenceGrade):
         labelValue = "RIESGO CRITICO"
 
-    newTest = Test().setName(body['name']).setAge(int(body['age'])).setDocumentNumber(body['document_number']).setAlimentation(alimentation).setGenetical(
+    newTest = Prueba().setName(body['name']).setAge(int(body['age'])).setDocumentNumber(body['document_number']).setAlimentation(alimentation).setGenetical(
         genetical).setGlucose(glucose).setPhysicalActivity(physicalActivity).setAbsoluteValue(centroidAbsoluteValue).setLowPertenenceGrade(lowPertenenceGrade).setMidPertenenceGrade(midPertenenceGrade).setHighPertenenceGrade(highPertenenceGrade).setCriticalPertenenceGrade(criticalPertenenceGrade).setResultLabel(labelValue).setUserId(1)
 
     db.session.add(newTest)

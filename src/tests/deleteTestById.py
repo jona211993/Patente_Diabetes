@@ -1,8 +1,8 @@
 from run import app, db
-from models.entities.Test import Test, test_schema
+from models.entities.Prueba import Prueba, test_schema
 
 def deleteTestById(testId):
-    test = Test.query.get(testId)
+    test = Prueba.query.get(testId)
 
     if(test==None):
         return {

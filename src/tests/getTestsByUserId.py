@@ -1,7 +1,7 @@
 from run import app, db
-from models.entities.Test import Test, tests_schema
+from models.entities.Prueba import Prueba, tests_schema
 from sqlalchemy import desc
 
 def getTestByUserId(userId):
-    userTests = Test.query.filter(Test.user_id == userId).order_by(desc(Test.id)).all()
+    userTests = Prueba.query.filter(Prueba.user_id == userId).order_by(desc(Prueba.id)).all()
     return tests_schema.jsonify(userTests)

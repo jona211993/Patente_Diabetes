@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     age = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     sex = db.Column(db.String(1), nullable=False)
-    tests = db.relationship('Test', backref='user', lazy=True)
+    tests = db.relationship('Prueba', backref='user', lazy=True)
 
     def __init__(self, id, username, password, fullname="") -> None:
         self.id = id
