@@ -1,6 +1,6 @@
-{% extends 'auth/user.html' %} {% block title %} Test Diabetes {%endblock %} {%
+{% extends 'auth/usuario.html' %} {% block title %} Test Diabetes {%endblock %} {%
     block customCSS %}
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/user.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/usuario.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/lista.css')}}" />
   
     {% endblock %} {% block body %}
@@ -13,10 +13,10 @@
         </div>
         <div class="p-2">
           <ul class="navega">
-            <li><a class="navega" aria-current="page" href="user">Inicio</a></li>
+            <li><a class="navega" aria-current="page" href="usuario">Inicio</a></li>
             <li><a class="navega" aria-current="page" href="#">Lista de Tests</a></li>
             <li>
-              <a class="navega" aria-current="page" href="test">Nuevo Test</a>
+              <a class="navega" aria-current="page" href="prueba">Nuevo Test</a>
             </li>
           </ul>
         </div>
@@ -90,18 +90,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for test in tests %}
+                    {% for prueba in tests %}
                         <tr>
-                            <td>{{test.0}}</td>                            
-                            <td>{{test.2}}</td>
-                            <td>{{test.1}}</td>
-                            <td>{{test.3}}</td>
-                            <td>{{test.4}}</td>
-                            <td>{{test.5}}</td>
-                            <td>{{test.6}}</td>
-                            <td>{{test.7}}</td>
-                            <td>{{test.8}}</td>
-                            <td>{{test.13}}</td>                             
+                            <td>{{prueba.0}}</td>                            
+                            <td>{{prueba.2}}</td>
+                            <td>{{prueba.1}}</td>
+                            <td>{{prueba.3}}</td>
+                            <td>{{prueba.4}}</td>
+                            <td>{{prueba.5}}</td>
+                            <td>{{prueba.6}}</td>
+                            <td>{{prueba.7}}</td>
+                            <td>{{prueba.8}}</td>
+                            <td>{{prueba.13}}</td>                             
                         </tr>
                     
                     {% endfor%}
