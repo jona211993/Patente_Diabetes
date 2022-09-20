@@ -11,27 +11,27 @@ def crearPrueba(body):
     glucosa = body['glucosa']
     ejercicio = body['ejercicio']
 
-    # Rango de la alimentación
-    x_alimentacion = np.arange(0, 8, 0.1)
+    # Rango de la COMIDA
+    x_comida = np.arange(0, 8, 0.1)
     # x_qual = np.linspace(0,10,11)
     # Rango de glucosa
     x_glucosa = np.arange(0, 201, 1)
-    # Rango de Genetica
-    x_genetica = np.arange(0, 6, 0.1)
-    # Rango de Actividad Fisica
-    x_a_fisica = np.arange(0, 8, 0.1)
+    # Rango de HERENCIA
+    x_herencia = np.arange(0, 6, 0.1)
+    # Rango de EJERCICIO
+    x_ejercicio = np.arange(0, 8, 0.1)
     # ==============================
     # Rango del porcentaje de Riesgo
     x_riesgo = np.arange(0, 2, 0.01)
 
     # NADA
-    nada = fuzz.trapmf(x_alimentacion, [0, 0, 0, 1.35])  # —- 0-1 5-0 \
+    nada = fuzz.trapmf(x_comida, [0, 0, 0, 1.35])  # —- 0-1 5-0 \
 
     # POCO
-    poco = fuzz.trimf(x_alimentacion, [1, 2, 3])  # —- 0-1 5-0 \
+    poco = fuzz.trimf(x_comida, [1, 2, 3])  # —- 0-1 5-0 \
 
     # MUCHO
-    mucho = fuzz.trapmf(x_alimentacion, [2, 3, 7, 7])  # —- 0-1 5-0 \
+    mucho = fuzz.trapmf(x_comida, [2, 3, 7, 7])  # —- 0-1 5-0 \
 
     # NORMAL
     g_normal = fuzz.trapmf(x_glucosa, [0, 0, 0, 90])  # —- 0-1 5-0 \
@@ -43,22 +43,22 @@ def crearPrueba(body):
     muy_preocu = fuzz.trapmf(x_glucosa, [110, 160, 200, 200])  # —- 0-1 5-0 \
 
     # NINGUNO
-    ninguno = fuzz.trapmf(x_genetica, [0, 0, 0, 1.2])  # —- 0-1 5-0 \
+    ninguno = fuzz.trapmf(x_herencia, [0, 0, 0, 1.2])  # —- 0-1 5-0 \
 
     # LEVE
-    leve = fuzz.trimf(x_genetica, [1, 2, 3])  # —- 0-1 5-0 \
+    leve = fuzz.trimf(x_herencia, [1, 2, 3])  # —- 0-1 5-0 \
 
     # GRAVE
-    grave = fuzz.trapmf(x_genetica, [2, 3, 5, 5])  # —- 0-1 5-0 \
+    grave = fuzz.trapmf(x_herencia, [2, 3, 5, 5])  # —- 0-1 5-0 \
 
     # BAJO
-    a_bajo = fuzz.trapmf(x_a_fisica, [0, 0, 0, 1.8])  # —- 0-1 5-0 \
+    a_bajo = fuzz.trapmf(x_ejercicio, [0, 0, 0, 1.8])  # —- 0-1 5-0 \
 
     # NORMAL
-    a_normal = fuzz.trimf(x_a_fisica, [1, 2, 3])  # —- 0-1 5-0 \
+    a_normal = fuzz.trimf(x_ejercicio, [1, 2, 3])  # —- 0-1 5-0 \
 
     # ALTO
-    a_alto = fuzz.trapmf(x_a_fisica, [2, 3, 7, 7])  # —- 0-1 5-0 \
+    a_alto = fuzz.trapmf(x_ejercicio, [2, 3, 7, 7])  # —- 0-1 5-0 \
 
     # Salida
     # BAJO
@@ -75,21 +75,21 @@ def crearPrueba(body):
 
     # Añadimos las funciones anteriores al dominio de cada variable de entrada
     # En la funcion se manda Vector de los X , luego la funcion , el valor de entrada
-    u_nada = fuzz.interp_membership(x_alimentacion, nada, comida)
-    u_poco = fuzz.interp_membership(x_alimentacion, poco, comida)
-    u_mucho = fuzz.interp_membership(x_alimentacion, mucho, comida)
+    u_nada = fuzz.interp_membership(x_comida, nada, comida)
+    u_poco = fuzz.interp_membership(x_comida, poco, comida)
+    u_mucho = fuzz.interp_membership(x_comida, mucho, comida)
 
     u_g_normal = fuzz.interp_membership(x_glucosa, g_normal, glucosa)
     u_preocupante = fuzz.interp_membership(x_glucosa, preocupante, glucosa)
     u_muy_preocu = fuzz.interp_membership(x_glucosa, muy_preocu, glucosa)
 
-    u_ninguno = fuzz.interp_membership(x_genetica, ninguno, herencia)
-    u_leve = fuzz.interp_membership(x_genetica, leve, herencia)
-    u_grave = fuzz.interp_membership(x_genetica, grave, herencia)
+    u_ninguno = fuzz.interp_membership(x_herencia, ninguno, herencia)
+    u_leve = fuzz.interp_membership(x_herencia, leve, herencia)
+    u_grave = fuzz.interp_membership(x_herencia, grave, herencia)
 
-    u_a_bajo = fuzz.interp_membership(x_a_fisica, a_bajo, ejercicio)
-    u_a_normal = fuzz.interp_membership(x_a_fisica, a_normal, ejercicio)
-    u_a_alto = fuzz.interp_membership(x_a_fisica, a_alto, ejercicio)
+    u_a_bajo = fuzz.interp_membership(x_ejercicio, a_bajo, ejercicio)
+    u_a_normal = fuzz.interp_membership(x_ejercicio, a_normal, ejercicio)
+    u_a_alto = fuzz.interp_membership(x_ejercicio, a_alto, ejercicio)
 
     # REGLA 0:
     active_rule0 = np.fmin(np.fmin(u_nada, u_g_normal),
@@ -276,297 +276,189 @@ def crearPrueba(body):
                             np.fmin(u_leve, u_a_bajo))
     # Clipping en la regla 30
     salida_activation_30 = np.fmin(active_rule30, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 31:
     active_rule31 = np.fmin(np.fmin(u_poco, u_g_normal),
                             np.fmin(u_leve, u_a_normal))
     # Clipping en la regla 31
     salida_activation_31 = np.fmin(active_rule31, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 32:
     active_rule32 = np.fmin(np.fmin(u_poco, u_g_normal),
                             np.fmin(u_leve, u_a_alto))
     # Clipping en la regla 32
     salida_activation_32 = np.fmin(active_rule32, bajo)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 33:
     active_rule33 = np.fmin(np.fmin(u_poco, u_g_normal),
                             np.fmin(u_grave, u_a_bajo))
     # Clipping en la regla 33
     salida_activation_33 = np.fmin(active_rule33, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 34:
     active_rule34 = np.fmin(np.fmin(u_poco, u_g_normal),
                             np.fmin(u_grave, u_a_normal))
     # Clipping en la regla 34
     salida_activation_34 = np.fmin(active_rule34, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 35:
     active_rule35 = np.fmin(np.fmin(u_poco, u_g_normal),
                             np.fmin(u_grave, u_a_alto))
     # Clipping en la regla 35
     salida_activation_35 = np.fmin(active_rule35, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 36:
     active_rule36 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_ninguno, u_a_bajo))
     # Clipping en la regla 36
     salida_activation_36 = np.fmin(active_rule36, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 37:
     active_rule37 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_ninguno, u_a_normal))
     # Clipping en la regla 37
     salida_activation_37 = np.fmin(active_rule37, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 38:
     active_rule38 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_ninguno, u_a_alto))
     # Clipping en la regla 38
     salida_activation_38 = np.fmin(active_rule38, bajo)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 39:
     active_rule39 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_leve, u_a_bajo))
     # Clipping en la regla 39
     salida_activation_39 = np.fmin(active_rule39, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 40:
     active_rule40 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_leve, u_a_normal))
     # Clipping en la regla 40
     salida_activation_40 = np.fmin(active_rule40, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 41:
     active_rule41 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_leve, u_a_alto))
     # Clipping en la regla 41
     salida_activation_41 = np.fmin(active_rule41, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 42:
     active_rule42 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_grave, u_a_bajo))
     # Clipping en la regla 42
     salida_activation_42 = np.fmin(active_rule42, critico)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 43:
     active_rule43 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_grave, u_a_normal))
     # Clipping en la regla 43
     salida_activation_43 = np.fmin(active_rule43, critico)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 44:
     active_rule44 = np.fmin(np.fmin(u_poco, u_preocupante),
                             np.fmin(u_grave, u_a_alto))
     # Clipping en la regla 44
     salida_activation_44 = np.fmin(active_rule44, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 45:
     active_rule45 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_ninguno, u_a_bajo))
     # Clipping en la regla 45
     salida_activation_45 = np.fmin(active_rule45, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 46:
     active_rule46 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_ninguno, u_a_normal))
     # Clipping en la regla 46
     salida_activation_46 = np.fmin(active_rule46, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 47:
     active_rule47 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_ninguno, u_a_alto))
     # Clipping en la regla 47
     salida_activation_47 = np.fmin(active_rule47, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 48:
     active_rule48 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_leve, u_a_bajo))
     # Clipping en la regla 48
     salida_activation_48 = np.fmin(active_rule48, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 49:
     active_rule49 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_leve, u_a_normal))
     # Clipping en la regla 49
     salida_activation_49 = np.fmin(active_rule49, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 50:
     active_rule50 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_leve, u_a_alto))
     # Clipping en la regla 50
     salida_activation_50 = np.fmin(active_rule50, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 51:
     active_rule51 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_grave, u_a_bajo))
     # Clipping en la regla 51
     salida_activation_51 = np.fmin(active_rule51, critico)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 52:
     active_rule52 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_grave, u_a_normal))
     # Clipping en la regla 52
     salida_activation_52 = np.fmin(active_rule52, critico)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 53:
     active_rule53 = np.fmin(np.fmin(u_poco, u_muy_preocu),
                             np.fmin(u_grave, u_a_alto))
     # Clipping en la regla 53
     salida_activation_53 = np.fmin(active_rule53, critico)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 54:
     active_rule54 = np.fmin(np.fmin(u_mucho, u_g_normal),
                             np.fmin(u_ninguno, u_a_bajo))
     # Clipping en la regla 54
     salida_activation_54 = np.fmin(active_rule54, bajo)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_54)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+   
 
     # REGLA 55:
     active_rule55 = np.fmin(np.fmin(u_mucho, u_g_normal),
                             np.fmin(u_ninguno, u_a_normal))
     # Clipping en la regla 55
     salida_activation_55 = np.fmin(active_rule55, bajo)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+   
 
     # REGLA 56:
     active_rule56 = np.fmin(np.fmin(u_mucho, u_g_normal),
                             np.fmin(u_ninguno, u_a_alto))
     # Clipping en la regla 56
     salida_activation_56 = np.fmin(active_rule56, bajo)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 57:
     active_rule57 = np.fmin(np.fmin(u_mucho, u_g_normal),
@@ -580,55 +472,35 @@ def crearPrueba(body):
                             np.fmin(u_leve, u_a_normal))
     # Clipping en la regla 58
     salida_activation_58 = np.fmin(active_rule58, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 59:
     active_rule59 = np.fmin(np.fmin(u_mucho, u_g_normal),
                             np.fmin(u_leve, u_a_alto))
     # Clipping en la regla 59
     salida_activation_59 = np.fmin(active_rule59, bajo)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+   
 
     # REGLA 60:
     active_rule60 = np.fmin(np.fmin(u_mucho, u_g_normal),
                             np.fmin(u_grave, u_a_bajo))
     # Clipping en la regla 60
     salida_activation_60 = np.fmin(active_rule60, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 61:
     active_rule61 = np.fmin(np.fmin(u_mucho, u_g_normal),
                             np.fmin(u_grave, u_a_normal))
     # Clipping en la regla 61
     salida_activation_61 = np.fmin(active_rule61, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 62:
     active_rule62 = np.fmin(np.fmin(u_mucho, u_g_normal),
                             np.fmin(u_grave, u_a_alto))
     # Clipping en la regla 62
     salida_activation_62 = np.fmin(active_rule62, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 63:
     active_rule63 = np.fmin(np.fmin(u_mucho, u_preocupante),
@@ -664,66 +536,42 @@ def crearPrueba(body):
                             np.fmin(u_leve, u_a_bajo))
     # Clipping en la regla 66
     salida_activation_66 = np.fmin(active_rule66, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 67:
     active_rule67 = np.fmin(np.fmin(u_mucho, u_preocupante),
                             np.fmin(u_leve, u_a_normal))
     # Clipping en la regla 67
     salida_activation_67 = np.fmin(active_rule67, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 68:
     active_rule68 = np.fmin(np.fmin(u_mucho, u_preocupante),
                             np.fmin(u_leve, u_a_alto))
     # Clipping en la regla 68
     salida_activation_68 = np.fmin(active_rule68, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 69:
     active_rule69 = np.fmin(np.fmin(u_mucho, u_preocupante),
                             np.fmin(u_grave, u_a_bajo))
     # Clipping en la regla 69
     salida_activation_69 = np.fmin(active_rule69, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 70:
     active_rule70 = np.fmin(np.fmin(u_mucho, u_preocupante),
                             np.fmin(u_grave, u_a_normal))
     # Clipping en la regla 70
     salida_activation_70 = np.fmin(active_rule70, alto)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 71:
     active_rule71 = np.fmin(np.fmin(u_mucho, u_preocupante),
                             np.fmin(u_grave, u_a_alto))
     # Clipping en la regla 71
     salida_activation_71 = np.fmin(active_rule71, normal)
-    # plt.style.use('default')
-    # fig=plt.figure(figsize=(6,4))
-    # plt.plot(x_riesgo,salida_activation_normal)
-    # plt.axis([0,1,0,1])
-    # plt.show()
+    
 
     # REGLA 72:
     active_rule72 = np.fmin(np.fmin(u_mucho, u_muy_preocu),
